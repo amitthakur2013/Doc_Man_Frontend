@@ -73,6 +73,7 @@ export class ListDocComponent implements OnInit {
   getRecords(){
     this.dms.getRecordsBySearchFilterCriteria(this.payload).subscribe(res => {
     this.data=res;
+    console.warn(res);
   },err => {console.log(err)})  
 }
 

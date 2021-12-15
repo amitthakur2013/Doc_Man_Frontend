@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DocManagerService } from 'src/app/services/doc-manager.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-list-doc',
@@ -44,8 +45,27 @@ export class ListDocComponent implements OnInit {
 
   // search filter starts
 
-  handleSubmit(){
-    console.warn(this.payload);
+  exportToExcel() {
+
+    const readyToExport = [];
+
+    this.data.map((d) => {
+      var data_format={
+        "Customer Id":d['customerId'],
+        "Document Type":d['docType'].toUpperCase(),
+        "Document No":d['docCorrespondingNumber'],
+        "Uploaded On":new Date(d['uploadTime']).toLocaleDateString(),
+        "Status":d['status'].toUpperCase(),
+        "Remarks":d['rejectReasons']
+      }
+      readyToExport.push(data_format);
+    });
+
+    const workBook = XLSX.utils.book_new(); 
+    const workSheet = XLSX.utils.json_to_sheet(readyToExport);
+
+    XLSX.utils.book_append_sheet(workBook, workSheet, 'data'); 
+    XLSX.writeFile(workBook, 'msme_doc_report.xlsx');
   }
 
   resetSearchFilterForm(){
@@ -73,7 +93,6 @@ export class ListDocComponent implements OnInit {
   getRecords(){
     this.dms.getRecordsBySearchFilterCriteria(this.payload).subscribe(res => {
     this.data=res;
-    console.warn(res);
   },err => {console.log(err)})  
 }
 

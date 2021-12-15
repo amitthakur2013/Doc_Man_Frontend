@@ -1,0 +1,30 @@
+.ovf-sc{
+    min-width: 700px;
+    overflow-x: auto;
+}
+
+.customrow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media only screen and (max-width: 995px) {
+    .text-toggle{
+        display: none;
+    }
+  }
+
+  .text-red {
+      color: red!important;
+      size: 0.5em;
+  }
+
+  .text-right {
+    text-align: right;margin: 0;padding: 0;
+  }
+
+  .ovf-y-sc{
+      max-height: 450px;
+      overflow-y: auto;
+  }

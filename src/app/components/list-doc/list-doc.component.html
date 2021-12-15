@@ -23,15 +23,15 @@
         </div>
         <div class="col-md-2">
             <span>From</span>
-            <input class="form-control" type="date" [(ngModel)]="payload.fromDate" name="fromDate" [max]="payload.toDate == null ? todayDate:payload.toDate"/>
+            <input class="form-control" type="date" [(ngModel)]="payload.fromDate" name="fromDate" [max]="payload.toDate == null ? todayDate:payload.toDate" (keydown)="disableManual()"/>
         </div>
         <div class="col-md-2">
             <span>To</span>
-            <input class="form-control" type="date" [(ngModel)]="payload.toDate" name="toDate" [max]="todayDate" [min]="payload.fromDate==null?'':payload.fromDate" />
+            <input class="form-control" type="date" [(ngModel)]="payload.toDate" name="toDate" [max]="todayDate" [min]="payload.fromDate==null?'':payload.fromDate" (keydown)="disableManual()" />
         </div>
         <div class="col-md-2 mt-4">
-            <button type="submit" class="btn-sm btn-primary">Search</button>
-            <button type="button" (click)="resetSearchFilterForm()" class="btn-sm btn-warning ml-1 text-white">Reset</button>
+            <button type="submit" class="btn btn-sm btn-primary">Search</button>
+            <button type="button" (click)="resetSearchFilterForm()" class="btn btn-sm btn-warning ml-1 text-white">Reset</button>
         </div>
     </div>
 </form>

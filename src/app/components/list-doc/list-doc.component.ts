@@ -42,6 +42,8 @@ export class ListDocComponent implements OnInit {
     this.getRecords();
   }
 
+  // search filter starts
+
   handleSubmit(){
     console.warn(this.payload);
   }
@@ -54,6 +56,7 @@ export class ListDocComponent implements OnInit {
       fromDate:null,
       toDate:null
     }
+    this.getRecords();
   }
 
   preventSpaceKey(e) { 
@@ -62,12 +65,18 @@ export class ListDocComponent implements OnInit {
       e.preventDefault();
      }      
   }
+
+  disableManual(){
+    return false;
+  }
  
   getRecords(){
     this.dms.getRecordsBySearchFilterCriteria(this.payload).subscribe(res => {
     this.data=res;
   },err => {console.log(err)})  
 }
+
+// search filter ends
 
   updateStatus(status:any,id:any,doc:any,updateStatusModal:any){
     this.curr_status=status;
